@@ -1,6 +1,6 @@
 [
     {
-        "model": "katalog.catalogitem",
+        "model": "katalog.CatalogItem",
         "pk": 1,
         "fields": {
             "item_name": "iPhone 12 Pro Max",
@@ -12,7 +12,7 @@
         }
     },
     {
-        "model": "katalog.catalogitem",
+        "model": "katalog.CatalogItem",
         "pk": 2,
         "fields": {
             "item_name": "MG Nu Gundam Ver.Ka",
@@ -24,7 +24,7 @@
         }
     },
     {
-        "model": "katalog.catalogitem",
+        "model": "katalog.CatalogItem",
         "pk": 3,
         "fields": {
             "item_name": "Samsung Galaxy S22",
@@ -36,7 +36,7 @@
         }
     },
     {
-        "model": "katalog.catalogitem",
+        "model": "katalog.CatalogItem",
         "pk": 4,
         "fields": {
             "item_name": "Nike Air Jordan Fasilkom",
