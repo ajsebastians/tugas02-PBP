@@ -13,8 +13,16 @@ XML adalah bahasa untuk menyederhanakan proses pertukaran dan penyimpanan data. 
 HTML adalah bahasa markup yang digunakan untuk membuat halaman website. HTML terdiri dari kombinasi teks dan simbol yang disimpan dalam sebuah file. HTML memang mempunyai kemiripan dengan XML. Namun, HTML dan XML mempunyai beberapa perbedaan. XML lebih berfungsi untuk menampilkan data, bersifat case insensitive, tidak terdiri dari data struktural, dan bersifat statis
  
 ### 2. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
- 
+Dalam pengimplementasian sebuah platform kita memerlukan data delivery data yang dibuat atau dikirmkan bisa saja memiliki format berbeda, oleh karena itu agar mempermudah pengiriman antar komputer dan platform kita menggunakan data delivery ini.
+
 ### 3. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+Pertama-tama saya membuat app bernama ```mywatchlist``` dengan memasukan `python3 manage.py startapp mywatchlist` pada terminal
+
+Kemudian, saya menambahkan aplikasi mywatchlist ke dalam `INSTALLED_APPS` di direktori ```project_django/settings.py```. setelah itu, di ```project_django/urls.py``` saya menambahkan url ke mywatchlist, lalu membuat ```urls.py``` di `/mywatchlist` untuk melakukan routing `/mywatchlist` ke ```views.py```
+Setelah itu, saya membuat model dengan field sesuai dengan ketentuan. 
+Setelah itu saya menjalankan `python manage.py makemigrations` dan `python manage.py migrate`
+Saya pun membuat folder fixtures, dan file html
+Saya juga membuat testing ke file test.py
  
 ### 4. Mengakses tiga URL di poin 6 menggunakan Postman, menangkap screenshot, dan menambahkannya ke dalam README.md
 HTML
