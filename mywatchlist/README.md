@@ -13,7 +13,7 @@ XML adalah bahasa untuk menyederhanakan proses pertukaran dan penyimpanan data. 
 HTML adalah bahasa markup yang digunakan untuk membuat halaman website. HTML terdiri dari kombinasi teks dan simbol yang disimpan dalam sebuah file. HTML memang mempunyai kemiripan dengan XML. Namun, HTML dan XML mempunyai beberapa perbedaan. XML lebih berfungsi untuk menampilkan data, bersifat case insensitive, tidak terdiri dari data struktural, dan bersifat statis
  
 ### 2. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
-Dalam pengimplementasian sebuah platform kita memerlukan data delivery data yang dibuat atau dikirmkan bisa saja memiliki format berbeda, oleh karena itu agar mempermudah pengiriman antar komputer dan platform kita menggunakan data delivery ini.
+Dalam pengimplementasian sebuah platform kita memerlukan data delivery data yang dibuat atau dikirimkan bisa saja memiliki format berbeda, oleh karena itu agar mempermudah pengiriman antar komputer dan platform kita menggunakan data delivery ini.
 
 ### 3. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
 Pertama-tama saya membuat app bernama ```mywatchlist``` dengan memasukan `python3 manage.py startapp mywatchlist` pada terminal
