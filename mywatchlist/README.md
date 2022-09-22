@@ -6,10 +6,10 @@ https://tugas02pbpbas.herokuapp.com/mywatchlist/html/
 ### a) JSON (JavaScript Object Notation)
 JSON merupakan format data open-standard data atau bersifat semi-structured. JSON besifat text-based dan dapat dibaca oleh manusia atau mesin. JSON dikumpulkan sebagai sebuh "events" yang diorganisasi secara batches. JSON dapat digunakan pada banyak aplikasi, tetapi JSON utamanya digunakan untuk mentransfer data antara server dan web application atau device yang terkoneksi dengan web karena aplikasi tersebut umumnya hanya dapat menerima data berbentuk text. File JSON menyimpan data di dalam nested objects and arrays yang berisi value dirinya sendiri. Struktur ini sangat bersifat adaptable, columns dari data source tidak membatasi penambahan data ke collection. JSON merupakan alternatif XML untuk semi-structured data karena JSON dapat menyampaikan representasi objek secara lebih compact
  
-### a) XML (eXtensible Markup Language) 
+### b) XML (eXtensible Markup Language) 
 XML adalah bahasa untuk menyederhanakan proses pertukaran dan penyimpanan data. XML akan menyimpan data dalam format teks yang sederhana, dengan struktur yang terdiri dari 3 segmen yaitu Deklarasi, Atribut, dan Elemen. Sekilas, XML memang mempunyai kemiripan dengan HTML. Namun, XML dan HTML mempunyai beberapa perbedaan. XML lebih berfungsi untuk menyimpan dan mengirimkan data, bersifat case sensitive, terdiri dari data struktural, dan bersifat dinamis
 
-### a) HTML (Hypertext Markup Language) 
+### c) HTML (Hypertext Markup Language) 
 HTML adalah bahasa markup yang digunakan untuk membuat halaman website. HTML terdiri dari kombinasi teks dan simbol yang disimpan dalam sebuah file. HTML memang mempunyai kemiripan dengan XML. Namun, HTML dan XML mempunyai beberapa perbedaan. XML lebih berfungsi untuk menampilkan data, bersifat case insensitive, tidak terdiri dari data struktural, dan bersifat statis
  
 ### 2. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
