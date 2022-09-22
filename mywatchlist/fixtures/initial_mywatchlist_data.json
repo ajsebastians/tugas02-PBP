@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.Movies",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "Pengabdi Setan 2: Communion",
+            "rating": "4",
+            "release_date": "2022-08-4",
+            "review": "Awalnya serem banget tapi di akhir akhir silau meennnn idup mati idup mati"
+        }
+    },
+    {
+        "model": "mywatchlist.Movies",
+        "pk": 2,
+        "fields": {
+            "watched": false,
+            "title": "Ivanna",
+            "rating": "3",
+            "release_date": "2022-07-14",
+            "review": "Buset tuh kepala orang udah gaada harga dirinya aja putusnya gampang banget"
+        }
+    },
+    {
+        "model": "mywatchlist.Movies",
+        "pk": 3,
+        "fields": {
+            "watched": true,
+            "title": "Mencuri Raden Saleh",
+            "rating": "4",
+            "release_date": "2022-08-25",
+            "review": "SERU! tegangnya dapet"
+        }
+    },
+    {
+        "model": "mywatchlist.Movies",
+        "pk": 4,
+        "fields": {
+            "watched": true,
+            "title": "Incantation",
+            "rating": "4",
+            "release_date": "2022-03-18",
+            "review": "Bikin ngeri sejak menit pertama"
+        }
+    },
+    {
+        "model": "mywatchlist.Movies",
+        "pk": 5,
+        "fields": {
+            "watched": false,
+            "title": "Lightyear",
+            "rating": "3",
+            "release_date": "2022-08-03",
+            "review": "Proses pendewasaan Buzz yang penuh plot twist, tapi tak berkesan"
+        }
+    },
+    {
+        "model": "mywatchlist.Movies",
+        "pk": 6,
+        "fields": {
+            "watched": false,
+            "title": "Bullet Train",
+            "rating": "4",
+            "release_date": "2022-08-10",
+            "review": "Tampilkan kekacauan dalam arti positif dan sangat menyenangkan"
+        }
+    },
+    {
+        "model": "mywatchlist.Movies",
+        "pk": 7,
+        "fields": {
+            "watched": false,
+            "title": "Minions: The Rise of Gru",
+            "rating": "3",
+            "release_date": "2022-07-01",
+            "review": "Fokus pada Gru, Minions hanya jadi bayangan"
+        }
+    },
+    {
+        "model": "mywatchlist.Movies",
+        "pk": 8,
+        "fields": {
+            "watched": false,
+            "title": "Everything Everywhere All at Once",
+            "rating": "4",
+            "release_date": "2022-06-24",
+            "review": "Inilah 'Multiverse of Madness' yang sesungguhnya"
+        }
+    },
+    {
+        "model": "mywatchlist.Movies",
+        "pk": 9,
+        "fields": {
+            "watched": true,
+            "title": "Spider-Man: No Way Home",
+            "rating": "4",
+            "release_date": "2021-09-17",
+            "review": "Hadirkan sisi lain Peter Parker yang menuju dewasa"
+        }
+    },
+    {
+        "model": "mywatchlist.Movies",
+        "pk": 10,
+        "fields": {
+            "watched": true,
+            "title": "Top Gun: Maverick",
+            "rating": "4",
+            "release_date": "2022-05-25",
+            "review": "Memberikan penghormatan besar kepada film pertamanya"
+        }
+    }
+]
