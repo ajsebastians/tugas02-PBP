@@ -1,0 +1,61 @@
+{% extends 'base.html' %} 
+{% block content %} 
+{% load todolist_customtags %}
+
+<h1>👋 Welcome back, {{ username }} 👋</h1>
+<h3>Your To-Do List👇</h3>
+
+<table>
+  <tr style="background-color: #e4e754f0">
+    <th>Done?</th>
+    <th>Created at</th>
+    <th>Task</th>
+    <th>Description</th>
+    <th></th>
+  </tr>
+
+  {% for task in todolist %}
+  <tr
+    style="
+        {% if forloop.counter0|modulo:2 != 0 %} background-color: rgb(230,230,230); {% endif %}
+        {% if task.is_finished %} text-decoration: line-through; opacity: 0.4; {% endif %}
+      ">
+    <td>
+      <input
+        type="checkbox"
+        name="status"
+        id="status"
+        {% if task.is_finished %} checked {% endif %}
+        onchange="location.href='{% url 'todolist:finish_task' task.id %}'"
+      />
+    </td>
+    <td>{{task.date}}</td>
+    <td>{{task.title}}</td>
+    <td>{{task.description}}</td>
+    <td style="display: flex; justify-content: center">
+      <button><a href="{% url 'todolist:delete_task' task.id %}">🗑 Delete Task</a></button>
+    </td>
+  </tr>
+  {% endfor %}
+  
+</table>
+
+<button style="margin-bottom: 15px">
+    
+    <a
+      href="{% url 'todolist:create_task' %}"
+      style="text-decoration: none; color: rgb(0, 0, 0)"
+      >🆕 Tambah Task Baru!</a>
+      
+  </button>
+
+<button style="margin-top: 15px">
+  <a
+    href="{% url 'todolist:logout' %}"
+    style="text-decoration: none; color: rgb(0, 0, 0)"
+    >Logout</a
+  >
+</button>
+
+
+{% endblock content %}

@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
-import dj_database_url
+#import dj_database_url
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 from pathlib import Path
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'example_app',
     'katalog',
     'mywatchlist',
+    'todolist',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,5 @@ for directory in [*STATICFILES_DIRS, STATIC_ROOT]:
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+TIME_ZONE = "Asia/Bangkok"

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "create">
+
+    <h1>Create Your Own Task!</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>To do: </td>
+                <td><input type="text" name="todolist" placeholder="To do" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Description: </td>
+                <td><input type="text" name="description" placeholder="Description" class="form-control"></td>
+            </tr>
+
+        </table>
+         <input type="submit" name="submit" value="Create"/>
+         <button><a href="{% url 'todolist:show_todolist' %}">See List</a></button>
+    </form>
+
+
+</div>
+
+{% endblock content %}
