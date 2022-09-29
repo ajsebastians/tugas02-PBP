@@ -11,6 +11,7 @@
     <th>Created at</th>
     <th>Task</th>
     <th>Description</th>
+    <th>Status</th>
     <th></th>
   </tr>
 
@@ -32,6 +33,7 @@
     <td>{{task.date}}</td>
     <td>{{task.title}}</td>
     <td>{{task.description}}</td>
+    <td>{% if task.is_finished %} Selesai {% else %} Belum Selesai {% endif %}</td>
     <td style="display: flex; justify-content: center">
       <button><a href="{% url 'todolist:delete_task' task.id %}">🗑 Delete Task</a></button>
     </td>
