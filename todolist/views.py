@@ -25,7 +25,8 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Akun telah berhasil dibuat!")
+            user = form.cleaned_data.get('username')
+            messages.success(request, "Akun " + user + " telah berhasil dibuat!")
             return redirect("todolist:login")
 
     context = {"form": form}
@@ -78,3 +79,7 @@ def finish_task(request, id):
     task.is_finished = not task.is_finished
     task.save(update_fields=["is_finished"])
     return HttpResponseRedirect(reverse("todolist:show_todolist"))
+
+def todolist(request):
+    randomclass = random.choice(['card border-primary mb-3', 'card border-secondary mb-3', 'card border-success mb-3', 'card border-danger mb-3'])
+    return render(request, "todolist.html", {'randomclass': randomclass})

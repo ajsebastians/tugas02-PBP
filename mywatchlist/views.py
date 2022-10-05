@@ -9,7 +9,7 @@ def bonus(request):
     for i in film:
         if i.watched == "Done":
             jumlah += 1
-    if jumlah >= len(film) - jumlah:
+    if jumlah < len(film) - jumlah:
         return "Selamat, kamu sudah banyak menonton!"
     else :
         return "Wah, kamu masih sedikit menonton!" 

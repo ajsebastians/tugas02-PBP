@@ -2,62 +2,75 @@
 {% block content %} 
 {% load todolist_customtags %}
 
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <style>
+		body,
+		html {
+
+			background: #7abecc !important;
+		}
+    </style>
+  </head>
+  <body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+<body>
 <h1>👋 Welcome back, {{ username }} 👋</h1>
-<h3>Your To-Do List👇</h3>
-
-<table>
-  <tr style="background-color: #e4e754f0">
-    <th>Done?</th>
-    <th>Created at</th>
-    <th>Task</th>
-    <th>Description</th>
-    <th>Status</th>
-    <th></th>
-  </tr>
-
-  {% for task in todolist %}
-  <tr
-    style="
-        {% if forloop.counter0|modulo:2 != 0 %} background-color: rgb(230,230,230); {% endif %}
-        {% if task.is_finished %} text-decoration: line-through; opacity: 0.4; {% endif %}
-      ">
-    <td>
-      <input
-        type="checkbox"
-        name="status"
-        id="status"
-        {% if task.is_finished %} checked {% endif %}
-        onchange="location.href='{% url 'todolist:finish_task' task.id %}'"
-      />
-    </td>
-    <td>{{task.date}}</td>
-    <td>{{task.title}}</td>
-    <td>{{task.description}}</td>
-    <td>{% if task.is_finished %} Selesai {% else %} Belum Selesai {% endif %}</td>
-    <td style="display: flex; justify-content: center">
-      <button><a href="{% url 'todolist:delete_task' task.id %}">🗑 Delete Task</a></button>
-    </td>
-  </tr>
-  {% endfor %}
-  
-</table>
-
-<button style="margin-bottom: 15px">
-    
-    <a
-      href="{% url 'todolist:create_task' %}"
-      style="text-decoration: none; color: rgb(0, 0, 0)"
-      >🆕 Tambah Task Baru!</a>
-      
-  </button>
-
-<button style="margin-top: 15px">
+<button class="text-center" style="margin-bottom: 15px" >
   <a
-    href="{% url 'todolist:logout' %}"
+    href="{% url 'todolist:create_task' %}"
     style="text-decoration: none; color: rgb(0, 0, 0)"
-    >Logout</a
-  >
+    >🆕 Tambah Task Baru!</a>
 </button>
 
+<button class="text-center" style="margin-top: 15px">
+<a href="{% url 'todolist:logout' %}" style="text-decoration: none; color: rgb(0, 0, 0)">Logout</a>
+</button>
+
+<h3>Your To-Do List👇</h3>
+<h3>ㅤ</h3>
+
+<div class="card-columns">
+  {% for task in todolist %}
+    <div class="{% if task.is_finished %} card border-dark {% endif %}">
+      <div class="{% if not task.is_finished %} card text-white bg-dark{% endif %}">
+        <h4 class="card-header">{{task.title}}</h4>
+        <div class="card-body">
+          <p class="card-text">{{task.description}}</p>
+          <h6 class="card-title">Created at {{task.date}}</h6>
+          
+          <td style="display: flex; justify-content: center">
+          <button><a href="{% url 'todolist:delete_task' task.id %}">🗑 Delete Task</a></button>
+          ㅤ</td>
+          <input
+          type="checkbox"
+          name="status"
+          id="status"
+          {% if task.is_finished %} checked {% endif %}
+          onchange="location.href='{% url 'todolist:finish_task' task.id %}'"
+          />
+          <td>{% if task.is_finished %} SELESAI {% else %} BELUM SELESAI {% endif %}</td>
+
+        </div>
+      </div>
+    </div>
+
+  </tr>
+  {% endfor %}
+</div>
+</body>
+</html>
 
 {% endblock content %}
