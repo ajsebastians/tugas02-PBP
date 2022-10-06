@@ -38,7 +38,23 @@ Kekurangan External CSS:
 - Halaman belum dapat tampil secara sempurna hingga file CSS selesai dipanggil.
   
 ## Jelaskan tag HTML5 yang kamu ketahui.
+```<button>```	membuat button yang dapat diklik.
+```<div>```     menspesifikan sebuah section dalam document.
+```<form>```	  men-define HTML form untuk input user.
+```<html>```	  men-define root dari HTML document.
+```<i>```	      mengubah style teks menjadi huruf itallic.
+```<img>```	    merepresentasikan sebuah gambar.
+```<input>```	  men-define input control.
+```<li>```	    men-define list item.
+```<title>```	  men-define title dari document.
 
 ## Jelaskan tipe-tipe CSS selector yang kamu ketahui.
+Terdapat 6 macam selektor di CSS, yaitu:
+1. Selektor Tag, memilih elemen berdasarkan nama tag
+2. Selektor Class, memilih elemen berdasarkan nama class yang diberikan. Selektor class dibuat dengan tanda titik di depannya.
+3. Selektor ID, hampir sama dengan class, tetapi bersifat unik dan hanya boleh digunakan oleh satu elemen saja.
+4. Selektor Atribut, memilih elemen berdasarkan atribut
+5. Selektor Universal, digunakan untuk menyeleksi semua elemen pada jangkauan tertentu.
+6. Selektor Pseudo, memilih elemen semu seperti state pada elemen, elemen before dan after, elemen ganjil, dan sebagainya. Terdapat dua macam selektor pseudo, yaitu pseudo-class selektor untuk state elemen dan pseudo-element selektor untuk elemen semu di HTML
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
