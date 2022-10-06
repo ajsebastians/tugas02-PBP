@@ -58,3 +58,6 @@ Terdapat 6 macam selektor di CSS, yaitu:
 6. Selektor Pseudo, memilih elemen semu seperti state pada elemen, elemen before dan after, elemen ganjil, dan sebagainya. Terdapat dua macam selektor pseudo, yaitu pseudo-class selektor untuk state elemen dan pseudo-element selektor untuk elemen semu di HTML
 
 ## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+Pada tugas 5 ini saya sebagian besar melakukan perubahan pada template di app todolist karena melakukan styling. Saya menggunakan framework Bootstrap karena telah dipelajari pada tutorial sebelumnya. Untuk menggunakannya, saya memasukan kode ```<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">``` pada bagian head. 
+
+Styling yang saya lakukan di antaranya menambahkan background, merapikan layout, mengubah table pada todolist.html menjadi bentuk card, styling agar card berubah warna ketika di-checklist sudah selesai, hingga mengerjakan soal bonus yakni menambahkan efeh hover zoom dan shadow pada card todolist.
