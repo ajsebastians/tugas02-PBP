@@ -5,10 +5,7 @@
     background-attachment: fixed;
 }
 
-body{
-    font-family: 'Nunito', sans-serif;
-    padding: 50px;
-  }
+.body{}
 
 .card{
     display: inline-block;

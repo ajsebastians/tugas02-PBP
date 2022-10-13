@@ -2,75 +2,228 @@
 {% block content %} 
 {% load todolist_customtags %}
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<style>
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #7abecc !important;
+  }
+</style>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <style>
-		body,
-		html {
-
-			background: #7abecc !important;
-		}
-    </style>
-  </head>
-  <body>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-  </body>
-</html>
-
-<body>
-<h1>👋 Welcome back, {{ username }} 👋</h1>
-<button class="text-center" style="margin-bottom: 15px" >
-  <a
-    href="{% url 'todolist:create_task' %}"
-    style="text-decoration: none; color: rgb(0, 0, 0)"
-    >🆕 Tambah Task Baru!</a>
-</button>
-
-<button class="text-center" style="margin-top: 15px">
-<a href="{% url 'todolist:logout' %}" style="text-decoration: none; color: rgb(0, 0, 0)">Logout</a>
-</button>
-
-<h3>Your To-Do List👇</h3>
-<h3>ㅤ</h3>
-
-<div class="card-columns">
-  {% for task in todolist %}
-    <div class="{% if task.is_finished %} card border-dark {% endif %}">
-      <div class="{% if not task.is_finished %} card text-white bg-dark{% endif %}">
-        <h4 class="card-header">{{task.title}}</h4>
-        <div class="card-body">
-          <p class="card-text">{{task.description}}</p>
-          <h6 class="card-title">Created at {{task.date}}</h6>
-          
-          <td style="display: flex; justify-content: center">
-          <button><a href="{% url 'todolist:delete_task' task.id %}">🗑 Delete Task</a></button>
-          ㅤ</td>
-          <input
-          type="checkbox"
-          name="status"
-          id="status"
-          {% if task.is_finished %} checked {% endif %}
-          onchange="location.href='{% url 'todolist:finish_task' task.id %}'"
-          />
-          <td>{% if task.is_finished %} SELESAI {% else %} BELUM SELESAI {% endif %}</td>
-
+<script>
+  $(document).ready(() => {
+    const card = task => `
+      <div class="card justify-center ${task.fields.is_finished && "opacity-30"} hover:scale-105 transition-all">
+        <div class="block bg-white max-w-sm text-left w-100">
+          <div class="py-3 px-20 border-b bg-gray-800 ${
+            task.fields.is_finished
+                ? "bg-grey"
+                : "bg-green-600"
+            } flex gap-2 text-white justify-left form-check items-center">
+            <label for="status inline-block">Selesai </label>
+            <input
+              type="checkbox"
+              name="status"
+              id="status-${task.pk}"
+              ${task.fields.is_finished && "checked"}
+              class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 focus:ring-2"
+            />
+          </div>
+          <div class="p-2">
+            <h5 class="text-gray-900 text-xl font-bold mb-2">${task.fields.title}</h5>
+            <p class="text-gray-700 text-sm mb-4">${task.fields.description}</p>
+            <p class="text-xs mb-2">Created at ${task.fields.date}</p>
+            <button
+              id="delete-${task.pk}"
+              type="button"
+              class="text-white bg-red-400 shadow-lg hover:shadow-red-400/50 transition-all text-sm px-3 py-2 text-center"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    `;
 
-  </tr>
-  {% endfor %}
+    const renderTasks = () => {
+      $.get("{% url 'todolist:show_json' %}", data => {
+        data.sort((a, b) => {
+          return a.fields.is_finished - b.fields.is_finished;
+        });
+        $.each(data, (i, value) => {
+          $("#todolist").append(card(value));
+          $(`#delete-${value.pk}`).click(() => {
+            deleteTask(value.pk);
+          });
+          $(`#status-${value.pk}`).change(() => {
+            finishTask(value.pk);
+          });
+        });
+      });
+    };
+
+    const deleteTask = id => {
+      const csrftoken = document.querySelector(
+        "[name=csrfmiddlewaretoken]"
+      ).value;
+
+      $.ajax({
+        url: "{% url 'todolist:delete_task' 0 %}".replace("0", id),
+        type: "DELETE",
+        headers: { "X-CSRFToken": csrftoken }, 
+        mode: "same-origin",
+        success: () => {
+          $(`#delete-${id}`).parent().parent().parent().remove();
+        },
+        error: error => {
+          console.log(error);
+        },
+      });
+    };
+
+    const finishTask = id => {
+      const csrftoken = document.querySelector(
+        "[name=csrfmiddlewaretoken]"
+      ).value;
+
+      $.ajax({
+        url: "{% url 'todolist:finish_task' 0 %}".replace("0", id),
+        type: "PUT",
+        headers: { "X-CSRFToken": csrftoken }, 
+        mode: "same-origin", 
+        success: response => {
+          $("#todolist").empty();
+          renderTasks();
+        },
+        error: error => {
+          console.log(error);
+        },
+      });
+    };
+
+    const openModal = e => {
+      e.preventDefault(); 
+      $("#create-task-modal").removeClass("hidden");
+    };
+
+    const closeModal = e => {
+      e.preventDefault();
+      $("#create-task-modal").addClass("hidden");
+    };
+
+    $("#create-task-form").submit(e => {
+      e.preventDefault();
+
+      const csrftoken = document.querySelector(
+        "[name=csrfmiddlewaretoken]"
+      ).value;
+
+      const title = $("#title").val();
+      const description = $("#description").val();
+
+      if (title && description) {
+        $.ajax({
+          type: "POST",
+          url: "{% url 'todolist:add_task' %}",
+          headers: { "X-CSRFToken": csrftoken }, 
+          mode: "same-origin", 
+          data: {
+            title: title,
+            description: description,
+          },
+          success: response => {
+            $("#create-task-form").trigger("reset");
+            closeModal();
+            $("#todolist").prepend(card(response));
+          },
+          error: error => {
+            console.log(error);
+          },
+        });
+      } else {
+        alert("Field masih kosong");
+      }
+    });
+
+    $("#create-task").click(openModal);
+    $("#close-modal").click(closeModal);
+
+    renderTasks(); 
+  });
+</script>
+
+<div id="create-task-modal" class="w-full fixed flex justify-center w-full z-10 min-h-screen items-center bg-black bg-opacity-40 hidden">
+  <div class="mt-7 bg-white shadow-lg">
+    <div class="p-5 sm:p-7">
+      <div class="p-5 sm:p-7">
+        <h1>
+          <b>Tambah Task Baruㅤㅤ</b>
+          <a href="{% url 'todolist:show_todolist' %}" class="font-bold text-red-400" id="close-modal">X</a>
+        </h1>
+        <h1>ㅤㅤ</h1>
+        <form method="post" id="create-task-form">
+          {% csrf_token %}
+          <div class="gap-5 text-left">
+            <label for="title">Title:</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Silakan isi nama task Anda"
+              required
+              class="col-span-2 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            />
+
+            <label for="password">Description:</label>
+            <input
+              type="text"
+              name="description"
+              id="description"
+              placeholder="Silakan isi deskripsi task Anda"
+              required
+              class="col-span-2 form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            />
+
+            <input
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="light"
+              class="col-span-3 text-white bg-blue-400 shadow-lg hover:shadow-blue-400/50 transition-all text-sm px-5 py-2.5 text-center"
+              type="submit"
+              value="Buat Task!"
+            />
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
-</body>
-</html>
+
+<div class="space-y-5 md:space-y-10 pt-10 max-w-[100%] mx-auto min-h-screen text-center">
+  <div><h1><b>👋 Welcome back, {{ username }} 👋</b></h1></div>
+  <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+
+    <button
+      type="button"
+      class="text-white bg-blue-400 shadow-lg hover:shadow-blue-400/50 transition-all text-sm px-4 py-2 text-center"
+      id="create-task">
+      <p>🆕 Tambah Task Baru!</p>
+    </button>
+
+    <button
+      onclick="location.href='{% url 'todolist:logout' %}'"
+      type="button"
+      class="text-white bg-black text-sm px-3 py-2 text-center">
+      <span class="text-white bg-black shadow-lg text-sm px-3 py-2 text-center">Logout</span>
+    </button>
+  </div>
+    <div>
+    <h3>Your To-Do List👇</h3>
+    <h3>ㅤ</h3>
+    </div>
+  <div id="todolist"></div>
+</div>
 
 {% endblock content %}
