@@ -1,37 +1,63 @@
-# Tugas 4: Pengimplementasian Form dan Autentikasi Menggunakan Django
+# Tugas 5: Web Design Using HTML, CSS, and CSS Framework
 ### Abraham Javier Sebastian Situmorang -- 2106704364 -- Kelas D
 ### Link Aplikasi Heroku [di sini](https://tugas02pbpbas.herokuapp.com/todolist/login/)
 
-## 1. Apa kegunaan ```{% csrf_token %}``` pada elemen ```<form>```? Apa yang terjadi apabila tidak ada potongan kode tersebut pada elemen ```<form>```?
-Cross-Site Request Forgery (CSRF) merupakan sebuah serangan yang membuat pengguna mengirimkan request ke app lain melalui app yang sedang digunakan tanpa disadari. Hal ini tentu tidak kita inginkan. Oleh karena itu, untuk mencegahnya digunakanlah ```{% csrf_token %}```.  
+## Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?
+### Inline CSS
+Inline CSS merupakan kode CSS yang ditulis langsung pada atribut elemen HTML. Atribut <style> digunakan untuk memberikan style ke tag HTML tertentu.
 
-Dengan menggunakan ```{% csrf_token %}``` pada elemen ```<form>```, nantinya sebuah string akan dibuat untuk membandingkan nilai unik dari csrf_token pada saat pengguna akan mengakses method POST. Lalu, elemen ```form``` akan menyetujuinya jika pengguna mengakses dengan benar. Hal ini pun akan terus  diperbaharui setiap pengguna melakukan reload data. Karena inilah, data tidak dapat disalahgunakan.
+Kelebihan Inline CSS:
+- Sangat membantu jika hanya melakukan pengujian dan melihat perubahan suatu elemen
+- Berguna untuk memperbaiki kode program dengan cepat
+- Proses Request HTTP yang lebih kecil dan load akan lebih cepat
+  
+Kekurangan Inline CSS:
+- Inline CSS harus diterapkan pada setiap elemen, sehingga kurang efisien
+  
+### Internal CSS
+Dalam Internal CSS, Kode diletakkan di dalam bagian <head> pada halaman dan di dalam tag <style></style>.
 
-Jika tidak terdapat potongan kode ```{% csrf_token %}``` pada elemen ```form```, akan muncul Forbidden Error (403), CSRF Verification Failed 
+Kelebihan Internal CSS:
+- Perubahan hanya terjadi pada 1 halaman
+- Class dan ID dapat digunakan oleh internal stylesheet
+- Tidak perlu melakukan upload beberapa file karena HTML dan CSS bisa digunakan di file yang sama.
 
-## 2. Apakah kita dapat membuat elemen ```<form>``` secara manual (tanpa menggunakan generator seperti ```{{ form.as_table }})```? Jelaskan secara gambaran besar bagaimana cara membuat ```<form>``` secara manual.
-Bisa, kita dapat membuat elemen ```<form>``` secara manual. 
-Hal yang perlu dilakukan yaitu ```{% csrf_token %}```, membuat method POST (`<form method="POST">`), membuat form dengan tabel yang dibuat 
-pada HTML, dan menggunakan form pada context untuk melakukan update form.
+Kekurangan Internal CSS:
+- Waktu akses website jadi meningkat
+- kurang efisien jika menggunakan CSS yang sama pada beberapa file karena perubahan hanya terjadi pada 1 halaman  
+  
+### External CSS
+Dalam External CSS, File CSS  diletakkan setelah bagian <head> pada halaman
 
-## 3. Jelaskan proses alur data dari submisi yang dilakukan oleh pengguna melalui HTML form, penyimpanan data pada database, hingga munculnya data yang telah disimpan pada template HTML.
-Ketika pengguna mensubmit data yang telah diisi melalui HTML form (menekan tombol submit), request berupa "POST" akan terkirim dan akan memanggil method dari view. Method tersebut akan mendapatkan data dari request serta membuat object baru pada database. Lalu, nantinya kita dapat mengambil data pada database ini dan di-filter sesuai data pengguna yang sedang login. 
+Kelebihdan External CSS:
+- Ukuran file HTML menjadi lebih kecil serta strukturnya menjadi lebih rapi
+- Kecepatan loading meningkat
+- File CSS yang sama dapat digunakan pada banyak halaman.
 
-## 4. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
-Pertama-tama saya membuat suatu aplikasi baru bernama todolist di proyek tugas Django yang sudah digunakan sebelumnya dengan mengetik ```python manage.py startapp todolist``` pada terminal dan menambahkan ```todolist``` pada ```INSTALLED_APPS``` di ```project_django/settings.py```
+Kekurangan External CSS:
+- Halaman belum dapat tampil secara sempurna hingga file CSS selesai dipanggil.
+  
+## Jelaskan tag HTML5 yang kamu ketahui.
+```<button>```	membuat button yang dapat diklik.
+```<div>```     menspesifikan sebuah section dalam document.
+```<form>```	  men-define HTML form untuk input user.
+```<html>```	  men-define root dari HTML document.
+```<i>```	      mengubah style teks menjadi huruf itallic.
+```<img>```	    merepresentasikan sebuah gambar.
+```<input>```	  men-define input control.
+```<li>```	    men-define list item.
+```<title>```	  men-define title dari document.
 
-Kemudian, saya menambahkan path todolist sehingga pengguna dapat mengakses http://localhost:8000/todolist dengan memasukkan ```path("todolist/", include("todolist.urls"))``` pada ```urlpatterns``` di ```project_django/urls.py```.
+## Jelaskan tipe-tipe CSS selector yang kamu ketahui.
+Terdapat 6 macam selektor di CSS, yaitu:
+1. Selektor Tag, memilih elemen berdasarkan nama tag
+2. Selektor Class, memilih elemen berdasarkan nama class yang diberikan. Selektor class dibuat dengan tanda titik di depannya.
+3. Selektor ID, hampir sama dengan class, tetapi bersifat unik dan hanya boleh digunakan oleh satu elemen saja.
+4. Selektor Atribut, memilih elemen berdasarkan atribut
+5. Selektor Universal, digunakan untuk menyeleksi semua elemen pada jangkauan tertentu.
+6. Selektor Pseudo, memilih elemen semu seperti state pada elemen, elemen before dan after, elemen ganjil, dan sebagainya. Terdapat dua macam selektor pseudo, yaitu pseudo-class selektor untuk state elemen dan pseudo-element selektor untuk elemen semu di HTML
 
-Lalu, saya membuat sebuah model Task yang memiliki atribut sesuai ketentuan di ```todolist/models.py```. Kemudian, tidak lupa saya menjalankan ```python manage.py makemigrations``` lalu ```python manage.py migrate``` untuk melakukan migrasi perubahan model ke database.
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+Pada tugas 5 ini saya sebagian besar melakukan perubahan pada template di app todolist karena melakukan styling. Saya menggunakan framework Bootstrap karena telah dipelajari pada tutorial sebelumnya. Untuk menggunakannya, saya memasukan kode ```<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">``` pada bagian head. 
 
-Kemudian, saya mengimplementasikan form registrasi, login, dan logout agar pengguna dapat menggunakan todolist dengan baik dengan membuat fungi pada ```views.py```.
-
-Kemudian, saya membuat halaman-halaman pada ```todolist/templates```. Misalnya halaman utama todolist dengan membuat file ```todolist.html```, halaman login dengan membuat ```login.html```, halaman register dengan membuat ```register.html```, dan halaman membuat task baru dengan membuat ```create_task.html``` 
-
-Kemudian, saya membuat routing sehingga beberapa fungsi dapat diakses melalui URL sesuai ketentuan dengan menambahkan ```urlpatterns``` pada ```todolist/urls.py```.
-
-Selanjutnya, saya melakukan git ```add```, ```commit```, dan  ```push```, melakukan deployment ke Heroku dengan ke Action lalu Re-run all jobs, dan menunggu deploy.
-
-Kemudian, saya masuk ke heroku, membuka app, menekan tombol more di kanan atas, dropdown ke bawah hingga menemukan run console, mengetik bash, lalu nantinya akan masuk ke terminal heroku. Saya pun mengetik ```python manage.py createsuperuser``` lalu memasukkan username, email, dan password. Superuser pun dapat diakses melalui https://tugas02pbpbas.herokuapp.com/admin/login/?next=/admin/. 
-
-Kemudian, saya membuat dua akun pengguna dan tiga dummy data menggunakan model Task pada akun masing-masing di situs web Heroku sesuai ketentuan. Tugas 4 pun selesai.
+Styling yang saya lakukan di antaranya menambahkan background, merapikan layout, mengubah table pada todolist.html menjadi bentuk card, styling agar card berubah warna ketika di-checklist sudah selesai, hingga mengerjakan soal bonus yakni menambahkan efeh hover zoom dan shadow pada card todolist.
